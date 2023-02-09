@@ -16,7 +16,9 @@ export function createStore(reducer) {
   };
 
   // 상태 반환 함수
-  const getState = () => ({ ...state });
+  const getState = () => {
+    return { ...state };
+  };
 
   // 상태 업데이트 함수
   const dispatch = (action) => {
