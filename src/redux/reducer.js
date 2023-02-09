@@ -10,12 +10,12 @@ export const reducer = (state = {}, /* action */ { type, payload }) => {
     case Action.FIRSTPAGE:
       return {
         ...state,
-        count: 1,
+        count: state.count + 1 || 1,
       };
     case Action.LASTPAGE:
       return {
         ...state,
-        count: 5,
+        count: state.count - 1 || 1,
       };
     case Action.SELECTPAGE:
       return {
