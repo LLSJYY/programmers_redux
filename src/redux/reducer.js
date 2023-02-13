@@ -32,7 +32,7 @@ export const reducer = (state = {}, /* action */ { type, payload }) => {
   }
 };
 
-export const sortReducer = (state = {}, { type, payload }) => {
+export const sortReducer = (state = { count: 5 }, { type, payload }) => {
   switch (type) {
     case ActionDropdown.SORTBYBIGLIST:
       return {
