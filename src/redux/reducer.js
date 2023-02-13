@@ -5,6 +5,11 @@ export const Action = {
   SELECTPAGE: "SELECTPAGE",
 };
 
+export const ActionDropdown = {
+  SORTBYBIGLIST: "SORTBYBIGLIST",
+  SORTBYSMALLLIST: "SORTBYSMALLLIST",
+};
+
 export const reducer = (state = {}, /* action */ { type, payload }) => {
   switch (type) {
     case Action.FIRSTPAGE:
@@ -21,6 +26,25 @@ export const reducer = (state = {}, /* action */ { type, payload }) => {
       return {
         ...state,
         count: payload.count,
+      };
+    default:
+      return { ...state };
+  }
+};
+
+export const sortReducer = (state = {}, { type, payload }) => {
+  debugger;
+
+  switch (type) {
+    case ActionDropdown.SORTBYBIGLIST:
+      return {
+        ...state,
+        count: state.count * payload.sortData || 1,
+      };
+    case ActionDropdown.SORTBYSMALLLIST:
+      return {
+        ...state,
+        count: state.count * payload.sortData || 1,
       };
     default:
       return { ...state };

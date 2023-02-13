@@ -35,6 +35,9 @@ td {
   font-size: 1rem;
 }
 
+li {
+  list-style: none;
+}
 #pagination {
   padding: 10px 10px;
   text-align: center;

@@ -3,7 +3,7 @@ export const employees = async () => {
   const data = await employeesData();
   const table = document.querySelector("#table");
   const tableHeader = Object.keys(data[0]);
-
+  
   table.innerHTML = `
     <table>
     <thead>

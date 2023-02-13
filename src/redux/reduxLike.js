@@ -11,6 +11,7 @@ export function createStore(reducer) {
 
   const publish = () => {
     listeners.forEach(({ subscriber, context }) => {
+      console.log(subscriber, context);
       subscriber(context);
     });
   };
@@ -23,7 +24,6 @@ export function createStore(reducer) {
   // 상태 업데이트 함수
   const dispatch = (action) => {
     state = reducer(state, action);
-    publish();
   };
   return {
     getState,

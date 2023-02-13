@@ -1,32 +1,39 @@
 import { Action, reducer } from "../../redux/reducer.js";
 import { createAction, createStore } from "../../redux/reduxLike.js";
-import { state } from "../../store.js";
 
-const firstBtn = document.getElementById("first-btn");
-const lastBtn = document.getElementById("last-btn");
-const pageList = document.getElementById("pagination");
+const store = createStore(reducer);
+
+const firstPage = () => store.dispatch(createAction(Action.FIRSTPAGE));
+const lastPage = () => store.dispatch(createAction(Action.LASTPAGE));
+
 export const pagination = () => {
-  const store = createStore(reducer);
-  const firstPage = () => store.dispatch(createAction(Action.FIRSTPAGE));
-  const lastPage = () => store.dispatch(createAction(Action.LASTPAGE));
+  paginationRender();
+};
 
-  store.subscribe(() => {
-    state.count = store.getState();
-  });
-  document.querySelector("#pagination").addEventListener("click", (e) => {
-    if (e.target.id === "first-btn") {
-      firstPage();
-    }
-    if (e.target.id === "last-btn") {
-      lastPage();
-    }
-  });
-  pageList.innerHTML = `
+document.querySelector("#pagination").addEventListener("click", (e) => {
+  if (e.target.id === "first-btn") {
+    firstPage();
+  }
+  if (e.target.id === "last-btn") {
+    lastPage();
+  }
+});
+
+const paginationRender = () => {
+  const state = store.getState();
+  const sortByDropDown = [1, 2, 3, 4, 5];
+  document.querySelector("#pagination").innerHTML = `
   <button class="arrow" id="first-btn">first</button>
-  <button>1</button>
-  <button>2</button>
-  <button>3</button>
-  <button>4</button>
-  <button>5</button>
+  ${sortByDropDown
+    .map((el) => {
+      if (el !== state.count) {
+        return `<button>${el}</button>`;
+      } else {
+        return `<button style="color:red">${el}</button>`;
+      }
+    })
+    .join(" ")}
   <button class="arrow" id="last-btn">last</button>`;
 };
+
+store.subscribe(paginationRender);
