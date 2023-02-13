@@ -33,18 +33,16 @@ export const reducer = (state = {}, /* action */ { type, payload }) => {
 };
 
 export const sortReducer = (state = {}, { type, payload }) => {
-  debugger;
-
   switch (type) {
     case ActionDropdown.SORTBYBIGLIST:
       return {
         ...state,
-        count: state.count * payload.sortData || 1,
+        count: payload.sortData || 5,
       };
     case ActionDropdown.SORTBYSMALLLIST:
       return {
         ...state,
-        count: state.count * payload.sortData || 1,
+        count: payload.sortData || 5,
       };
     default:
       return { ...state };

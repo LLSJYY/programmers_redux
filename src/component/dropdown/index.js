@@ -2,7 +2,7 @@ import { ActionDropdown, sortReducer } from "../../redux/reducer.js";
 import { createAction, createStore } from "../../redux/reduxLike.js";
 
 const store = createStore(sortReducer);
-
+const qtySelector = [5, 15];
 export const dropdown = () => {
   const dropdown = document.querySelector("#dropdown");
   document.querySelector("#dropdown").addEventListener("click", (e) => {
@@ -34,15 +34,19 @@ export const dropdown = () => {
 
 const dropdownRender = () => {
   const dropdown = document.querySelector("#dropdown");
+  const currentQty = store.getState();
   if (dropdown.classList.contains("clicked")) {
     document.querySelector("#dropdown").innerHTML = `
-    <ul class="dropdown-menu">
-      <li id="sort-by-5" data-sort="5">5개씩</li>
-      <li id="sort-by-15"data-sort="15">15개씩</li>
+    <ul class="dropdown-menu" id="qty-selector">
+     ${qtySelector
+       .map((qty) => `<li data-sort="${qty}">${qty}개</li>`)
+       .join("")}
     </ul>
     </div>
     `;
   } else {
-    document.querySelector("#dropdown").innerHTML = `<div>드롭다운</div>`;
+    document.querySelector(
+      "#dropdown"
+    ).innerHTML = `<ul class="dropdown-menu">${currentQty.count}개씩</ul>`;
   }
 };

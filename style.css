@@ -38,6 +38,10 @@ td {
 li {
   list-style: none;
 }
+.dropdown-menu {
+  margin: 0;
+  text-align: center;
+}
 #pagination {
   padding: 10px 10px;
   text-align: center;
