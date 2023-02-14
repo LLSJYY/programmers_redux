@@ -1,9 +1,13 @@
-import { employeesData } from "../../api/employee.js";
+import { employeesData } from "../../api/employee";
+import { storeDropdown } from "../dropdown/index";
+
 export const employees = async () => {
+  const qtySelector = storeDropdown.getState();
+  console.log(qtySelector);
   const data = await employeesData();
   const table = document.querySelector("#table");
   const tableHeader = Object.keys(data[0]);
-  
+  const selectedData = data.slice(0, qtySelector);
   table.innerHTML = `
     <table>
     <thead>
@@ -24,3 +28,5 @@ export const employees = async () => {
   </table>
 `;
 };
+
+storeDropdown.subscribe(employees);

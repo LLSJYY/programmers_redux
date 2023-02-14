@@ -1,5 +1,5 @@
-import { ActionDropdown, sortReducer } from "../../redux/reducer.js";
-import { createAction, createStore } from "../../redux/reduxLike.js";
+import { ActionDropdown, sortReducer } from "../../redux/reducer";
+import { createAction, createStore } from "../../redux/reduxLike";
 
 export const storeDropdown = createStore(sortReducer);
 const qtySelector = [5, 15];
@@ -16,12 +16,12 @@ const sortBySmall = (dataSortValue) =>
 
 export const dropdown = () => {
   const dropdown = document.querySelector("#dropdown");
-  document.querySelector("#dropdown").addEventListener("click", (e) => {
-    const dataSortValue = e.target.getAttribute("data-sort");
-    if (
-      e.target.closest(".area").classList.contains("clicked") &&
-      dataSortValue
-    ) {
+  document.querySelector("#dropdown").addEventListener("click", (e: Event) => {
+    const target = e.target as HTMLLIElement;
+    const dropdownArea = target.closest("#dropdown");
+    const dataSortValue = target.getAttribute("data-sort");
+
+    if (dropdownArea.classList.contains("clicked") && dataSortValue) {
       dataSortValue === "5"
         ? sortBySmall(dataSortValue)
         : sortByBig(dataSortValue);

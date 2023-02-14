@@ -1,16 +1,26 @@
-import { Action, reducer } from "../../redux/reducer.js";
-import { createAction, createStore } from "../../redux/reduxLike.js";
-import { storeDropdown } from "../dropdown/index.js";
-import { employeesData } from "../../api/employee.js";
+import { Action, reducer } from "../../redux/reducer";
+import { createAction, createStore } from "../../redux/reduxLike";
+import { storeDropdown } from "../dropdown/index";
+import { employeesData } from "../../api/employee";
 
 const store = createStore(reducer);
-const totalEmployees = await employeesData();
+const totalEmployees = async () => {
+  return await employeesData();
+};
+let state;
+let count;
 const firstPage = () => store.dispatch(createAction(Action.FIRSTPAGE));
-const lastPage = () => store.dispatch(createAction(Action.LASTPAGE));
+const lastPage = () => {
+  store.dispatch(
+    createAction(Action.LASTPAGE, {
+      pageLength: Math.ceil(totalEmployees.length / count),
+    })
+  );
+};
 
 export const pagination = () => {
   paginationRender();
-  document.querySelector("#pagination").addEventListener("click", (e) => {
+  document.querySelector("#pagination").addEventListener("click", (e: any) => {
     if (e.target.id === "first-btn") {
       firstPage();
     }
@@ -21,8 +31,8 @@ export const pagination = () => {
 };
 
 const paginationRender = () => {
-  const state = store.getState();
-  const { count } = storeDropdown.getState();
+  state = store.getState();
+  count = storeDropdown.getState().count;
   let pageArr;
   if (count) {
     pageArr = Array.from(
@@ -30,6 +40,7 @@ const paginationRender = () => {
       (_, i) => i + 1
     );
   } else {
+    count = 5;
     pageArr = [1, 2, 3, 4, 5];
   }
   document.querySelector("#pagination").innerHTML = `
