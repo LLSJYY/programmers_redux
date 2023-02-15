@@ -4,11 +4,13 @@ import { storeDropdown } from "../dropdown/index";
 import { employeesData } from "../../api/employee";
 
 const store = createStore(reducer);
-const totalEmployees = async () => {
+
+const totalEmployees = async (): Promise<[{}]> => {
   return await employeesData();
 };
-let state;
+let state; ///Todo
 let count;
+
 const firstPage = () => store.dispatch(createAction(Action.FIRSTPAGE));
 const lastPage = () => {
   store.dispatch(

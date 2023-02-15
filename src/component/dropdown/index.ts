@@ -5,7 +5,7 @@ import { View } from "./View";
 export const storeDropdown = createStore(sortReducer);
 
 interface ICurrentQty {
-  count?: number;
+  sortValue?: number;
 }
 const sortByBig = (dataSortValue: number) =>
   storeDropdown.dispatch(
@@ -20,7 +20,7 @@ const sortBySmall = (dataSortValue: number) =>
 
 export const dropdown = () => {
   const dropdown: HTMLDivElement = document.querySelector("#dropdown");
-  const currentQty: ICurrentQty = storeDropdown.getState();
+  const currSortValue: ICurrentQty = storeDropdown.getState();
 
   dropdown.addEventListener("click", (e: Event) => {
     const target = e.target as HTMLLIElement;
@@ -35,7 +35,7 @@ export const dropdown = () => {
     } else {
       dropdown.classList.add("clicked");
     }
-    return View(currentQty);
+    return View(currSortValue);
   });
 };
 
