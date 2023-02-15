@@ -1,4 +1,18 @@
 // Reducer 정의
+interface IStatePage {
+  pageLength: number;
+  count: number;
+}
+interface ISort {
+  sortData: number;
+  count: number;
+}
+interface IReducer<T> {
+  state: { count: number };
+  type: string;
+  payload: T;
+}
+
 export const Action = {
   FIRSTPAGE: "FIRSTPAGE",
   LASTPAGE: "LASTPAGE",
@@ -10,7 +24,10 @@ export const ActionDropdown = {
   SORTBYSMALLLIST: "SORTBYSMALLLIST",
 };
 
-export const reducer = (state = {}, /* action */ { type, payload }) => {
+export const reducer = (
+  state = { count: 1 },
+  { type, payload }: IReducer<IStatePage>
+) => {
   switch (type) {
     case Action.FIRSTPAGE:
       return {
@@ -33,7 +50,10 @@ export const reducer = (state = {}, /* action */ { type, payload }) => {
   }
 };
 
-export const sortReducer = (state = { count: 5 }, { type, payload }) => {
+export const sortReducer = (
+  state = { count: 5 },
+  { type, payload }: IReducer<ISort>
+) => {
   switch (type) {
     case ActionDropdown.SORTBYBIGLIST:
       return {
