@@ -20,12 +20,11 @@ const sortBySmall = (dataSortValue: number) =>
 
 export const dropdown = () => {
   const dropdown: HTMLDivElement = document.querySelector("#dropdown");
-  const currSortValue: ICurrentQty = storeDropdown.getState();
-
   dropdown.addEventListener("click", (e: Event) => {
     const target = e.target as HTMLLIElement;
     const dropdownArea = target.closest("#dropdown");
     const dataSortValue = Number(target.getAttribute("data-sort"));
+    const currSortValue: ICurrentQty = storeDropdown.getState();
 
     if (dropdownArea.classList.contains("clicked") && dataSortValue) {
       dataSortValue === 5
@@ -35,7 +34,7 @@ export const dropdown = () => {
     } else {
       dropdown.classList.add("clicked");
     }
-    return View(currSortValue);
+    View(storeDropdown.getState());
   });
 };
 

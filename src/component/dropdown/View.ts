@@ -3,6 +3,8 @@ interface Vprops {
 }
 
 export const View = (currSortValue: Vprops) => {
+  debugger;
+  console.log(currSortValue);
   const sortValueArr: number[] = [5, 15];
   const dropdown: HTMLDivElement = document.querySelector("#dropdown");
 

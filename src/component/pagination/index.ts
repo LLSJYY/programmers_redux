@@ -4,10 +4,10 @@ import { storeDropdown } from "../dropdown/index";
 import { employeesData } from "../../api/employee";
 
 const store = createStore(reducer);
-
 const totalEmployees = async (): Promise<[{}]> => {
   return await employeesData();
 };
+
 let state; ///Todo
 let count;
 
