@@ -1,4 +1,4 @@
-export const employeesData = () => {
-  const res = fetch("../src/data.json").then((res) => res.json());
+export const employeesData = async () => {
+  const res = await fetch("../src/data.json").then((res) => res.json());
   return res;
 };

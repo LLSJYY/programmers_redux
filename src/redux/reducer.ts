@@ -1,7 +1,7 @@
 // Reducer 정의
 interface IStatePage {
-  pageLength: number;
-  count: number;
+  totalEmployees: number;
+  id: number;
 }
 interface ISort {
   sortData: number;
@@ -23,7 +23,7 @@ export const ActionDropdown = {
   SORTBYSMALLLIST: "SORTBYSMALLLIST",
 };
 
-export const reducer = (
+export const pageReducer = (
   state = { count: 1 },
   { type, payload }: IReducer<IStatePage>
 ) => {
@@ -34,15 +34,15 @@ export const reducer = (
         count: 1,
       };
     case Action.LASTPAGE:
-      console.log(payload);
       return {
         ...state,
-        count: payload.pageLength,
+        count: payload.totalEmployees,
       };
     case Action.SELECTPAGE:
+      console.log(payload.id);
       return {
         ...state,
-        count: payload.count,
+        count: payload.id,
       };
     default:
       return { ...state };

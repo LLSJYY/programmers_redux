@@ -2,9 +2,7 @@ interface Vprops {
   sortValue?: number;
 }
 
-export const View = (currSortValue: Vprops) => {
-  debugger;
-  console.log(currSortValue);
+const View = (currSortValue: Vprops) => {
   const sortValueArr: number[] = [5, 15];
   const dropdown: HTMLDivElement = document.querySelector("#dropdown");
 
@@ -21,3 +19,5 @@ export const View = (currSortValue: Vprops) => {
     dropdown.innerHTML = `<ul class="dropdown-menu">${currSortValue.sortValue}개씩</ul>`;
   }
 };
+
+export default View;

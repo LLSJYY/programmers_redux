@@ -1,7 +1,6 @@
 export function createStore(reducer) {
   let state;
   const listeners = [];
-
   const subscribe = (subscriber, context = null) => {
     listeners.push({
       subscriber,
