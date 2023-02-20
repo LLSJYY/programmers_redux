@@ -9,7 +9,7 @@ import { dropdown } from "./component/dropdown";
 export const storeDropdown = createStore(sortReducer);
 export const storePage = createStore(pageReducer);
 
-dropdown(storeDropdown);
+dropdown(storeDropdown, storePage);
 pagination(storePage, storeDropdown);
 table(storeDropdown, storePage);
 storeDropdown.subscribe(() => ViewTable(storeDropdown, storePage));

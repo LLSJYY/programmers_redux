@@ -1,4 +1,4 @@
-import { ActionDropdown, sortReducer } from "../../redux/reducer";
+import { ActionDropdown, Action } from "../../redux/reducer";
 import { createAction, createStore } from "../../redux/reduxLike";
 import View from "./View";
 
@@ -6,7 +6,7 @@ interface ICurrentQty {
   sortValue?: number;
 }
 
-export const dropdown = (storeDropdown) => {
+export const dropdown = (storeDropdown, storePage) => {
   const dropdownEl: HTMLDivElement = document.querySelector("#dropdown");
   const sortByBig = (dataSortValue: number) =>
     storeDropdown.dispatch(
@@ -18,6 +18,9 @@ export const dropdown = (storeDropdown) => {
         sortData: dataSortValue,
       })
     );
+  const firstPage = () => {
+    storePage.dispatch(createAction(Action.FIRSTPAGE));
+  };
   dropdownEl.addEventListener("click", (e: Event) => {
     const target = e.target as HTMLLIElement;
     const dropdownArea = target.closest("#dropdown");
@@ -27,6 +30,7 @@ export const dropdown = (storeDropdown) => {
       dataSortValue === 5
         ? sortBySmall(dataSortValue)
         : sortByBig(dataSortValue);
+      firstPage();
       dropdownEl.classList.remove("clicked"); //Todo 하드코딩
     } else {
       dropdownEl.classList.add("clicked");
