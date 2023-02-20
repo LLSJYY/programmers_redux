@@ -9,10 +9,18 @@ import { dropdown } from "./component/dropdown";
 export const storeDropdown = createStore(sortReducer);
 export const storePage = createStore(pageReducer);
 
+// Initialize components
 dropdown(storeDropdown, storePage);
-pagination(storePage, storeDropdown);
+pagination(storeDropdown, storePage);
 table(storeDropdown, storePage);
-storeDropdown.subscribe(() => ViewTable(storeDropdown, storePage));
-storePage.subscribe(() => ViewTable(storeDropdown, storePage));
-storeDropdown.subscribe(() => ViewPagination(storePage, storeDropdown));
-storePage.subscribe(() => ViewPagination(storePage, storeDropdown));
+
+// subscribe
+storeDropdown.subscribe(() => {
+  ViewTable(storeDropdown, storePage);
+  ViewPagination(storePage, storeDropdown);
+});
+
+storePage.subscribe(() => {
+  ViewTable(storeDropdown, storePage);
+  ViewPagination(storePage, storeDropdown);
+});
